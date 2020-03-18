@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TestDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="ParentDepartmentID" Type="Guid" />
+    <NavigationProperty Name="Department1" Relationship="Self.FK_Categories_ParentId" FromRole="Department" ToRole="Department1" />
+    <NavigationProperty Name="Department2" Relationship="Self.FK_Categories_ParentId" FromRole="Department1" ToRole="Department" />
+    <NavigationProperty Name="Empoyee" Relationship="Self.FK_Empoyee_DepatmentId" FromRole="Department" ToRole="Empoyee" />
+  </EntityType>
+  <EntityType Name="Empoyee">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Decimal" Precision="5" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SurName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DocSeries" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="DocNumber" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+    <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DepartmentID" Type="Guid" Nullable="false" />
+    <NavigationProperty Name="Department" Relationship="Self.FK_Empoyee_DepatmentId" FromRole="Empoyee" ToRole="Department" />
+  </EntityType>
+  <Association Name="FK_Categories_ParentId">
+    <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+    <End Role="Department1" Type="Self.Department" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Department1">
+        <PropertyRef Name="ParentDepartmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Empoyee_DepatmentId">
+    <End Role="Department" Type="Self.Department" Multiplicity="1" />
+    <End Role="Empoyee" Type="Self.Empoyee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Empoyee">
+        <PropertyRef Name="DepartmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TestDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Department" EntityType="Self.Department" />
+    <EntitySet Name="Empoyee" EntityType="Self.Empoyee" />
+    <AssociationSet Name="FK_Categories_ParentId" Association="Self.FK_Categories_ParentId">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="Department1" EntitySet="Department" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Empoyee_DepatmentId" Association="Self.FK_Empoyee_DepatmentId">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="Empoyee" EntitySet="Empoyee" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
