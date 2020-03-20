@@ -34,6 +34,8 @@ namespace TestTask
             Department_code.Enabled = false;
             Dep.Enabled = false;
             Save.Visible = false;
+            Change.Enabled = false;
+            Del.Enabled = false;
             
             Cansel.Visible = false;
             var bs = new BindingSource();

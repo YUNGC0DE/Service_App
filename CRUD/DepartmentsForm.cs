@@ -64,7 +64,17 @@ namespace TestTask
                 MessageBox.Show("Введите имя отдела");
                 return;
             }
-            
+            if (Department_name.Text.Length > 50)
+            {
+                MessageBox.Show("Имя отдела не может быть больше 50 символов");
+                return;
+            }
+            if (Department_code.Text.Length > 10)
+            {
+                MessageBox.Show("Мнемокод не может превышать 10 символов");
+                return;
+            }
+
             if (!changing) 
             {
                 Department department = new Department();

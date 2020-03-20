@@ -36,14 +36,44 @@ namespace TestTask
                 MessageBox.Show("Введите имя");
                 return;
             }
+            if (F_name.Text.Length > 50)
+            {
+                MessageBox.Show("Имя не должно превышать 50 символов");
+                return;
+            }
             if (Surname.Text.Length < 1)
             {
                 MessageBox.Show("Введите фамилию");
                 return;
             }
+            if (Surname.Text.Length > 50)
+            {
+                MessageBox.Show("Фамилия не должна привышать 50 символов");
+                return;
+            }
             if (Position.Text.Length < 1)
             {
                 MessageBox.Show("Введите должность");
+                return;
+            }
+            if (Position.Text.Length > 50)
+            {
+                MessageBox.Show("Должность не может превышать 50 символов");
+                return;
+            }
+            if (Docser.Text.Length > 4)
+            {
+                MessageBox.Show("Серия паспорта не может быть больше 4 символов");
+                return;
+            }
+            if (Docnum.Text.Length > 6)
+            {
+                MessageBox.Show("Номер паспорта не может быть больше 6 символов");
+                return;
+            }
+            if (Patr.Text.Length > 50)
+            {
+                MessageBox.Show("Отчество не может быть больше 50 символов");
                 return;
             }
             string firstName = F_name.Text;
