@@ -14,3 +14,5 @@ C:\Users\menin\source\repos\TestTask\obj\Debug\TestTask.Menu.resources
 C:\Users\menin\source\repos\TestTask\obj\Debug\TestTask.EmployeesForm.resources
 C:\Users\menin\source\repos\TestTask\obj\Debug\TestTask.View_Edit_employeer_form.resources
 C:\Users\menin\source\repos\TestTask\obj\Debug\TestTask.csprojAssemblyReference.cache
+C:\Users\menin\source\repos\TestTask\obj\Debug\TestTask.AddEmployeeForm.resources
+C:\Users\menin\source\repos\TestTask\obj\Debug\TestTask.DepartmentsForm.resources

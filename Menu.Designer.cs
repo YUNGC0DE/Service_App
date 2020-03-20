@@ -43,7 +43,7 @@
             this.Employees_button.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.Employees_button.FlatAppearance.MouseOverBackColor = System.Drawing.Color.PapayaWhip;
             this.Employees_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Employees_button.Font = new System.Drawing.Font("Sitka Small", 10F);
+            this.Employees_button.Font = new System.Drawing.Font("Times New Roman", 12F);
             this.Employees_button.Location = new System.Drawing.Point(35, 88);
             this.Employees_button.Name = "Employees_button";
             this.Employees_button.Size = new System.Drawing.Size(289, 84);
@@ -59,13 +59,14 @@
             this.Department_button.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.Department_button.FlatAppearance.MouseOverBackColor = System.Drawing.Color.PapayaWhip;
             this.Department_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Department_button.Font = new System.Drawing.Font("Sitka Small", 10F);
+            this.Department_button.Font = new System.Drawing.Font("Times New Roman", 12F);
             this.Department_button.Location = new System.Drawing.Point(35, 197);
             this.Department_button.Name = "Department_button";
             this.Department_button.Size = new System.Drawing.Size(289, 79);
             this.Department_button.TabIndex = 6;
             this.Department_button.Text = "Департаменты";
             this.Department_button.UseVisualStyleBackColor = false;
+            this.Department_button.Click += new System.EventHandler(this.Department_button_Click);
             // 
             // Structure_button
             // 
@@ -74,7 +75,7 @@
             this.Structure_button.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.Structure_button.FlatAppearance.MouseOverBackColor = System.Drawing.Color.PapayaWhip;
             this.Structure_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Structure_button.Font = new System.Drawing.Font("Sitka Small", 10F);
+            this.Structure_button.Font = new System.Drawing.Font("Times New Roman", 12F);
             this.Structure_button.Location = new System.Drawing.Point(35, 301);
             this.Structure_button.Name = "Structure_button";
             this.Structure_button.Size = new System.Drawing.Size(289, 86);

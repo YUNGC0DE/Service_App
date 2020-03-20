@@ -30,6 +30,7 @@
         {
             this.DataView = new System.Windows.Forms.DataGridView();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.Change = new System.Windows.Forms.Button();
             this.Del_employee = new System.Windows.Forms.Button();
             this.Add_employee = new System.Windows.Forms.Button();
             this.Dep_list = new System.Windows.Forms.ComboBox();
@@ -62,10 +63,10 @@
             this.DataView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DataView.Size = new System.Drawing.Size(986, 462);
             this.DataView.TabIndex = 2;
-            this.DataView.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataView_RowHeaderMouseClick);
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.Change);
             this.panel3.Controls.Add(this.Del_employee);
             this.panel3.Controls.Add(this.Add_employee);
             this.panel3.Controls.Add(this.Dep_list);
@@ -80,24 +81,43 @@
             this.panel3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Panel3_MouseDown);
             this.panel3.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Panel3_MouseMove);
             // 
+            // Change
+            // 
+            this.Change.BackColor = System.Drawing.Color.White;
+            this.Change.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Change.Font = new System.Drawing.Font("Times New Roman", 10F);
+            this.Change.Location = new System.Drawing.Point(54, 404);
+            this.Change.Name = "Change";
+            this.Change.Size = new System.Drawing.Size(209, 35);
+            this.Change.TabIndex = 19;
+            this.Change.Text = "Просмотр | Изменение";
+            this.Change.UseVisualStyleBackColor = false;
+            this.Change.Click += new System.EventHandler(this.Change_Click);
+            // 
             // Del_employee
             // 
-            this.Del_employee.Location = new System.Drawing.Point(185, 393);
+            this.Del_employee.BackColor = System.Drawing.Color.White;
+            this.Del_employee.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Del_employee.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Del_employee.Location = new System.Drawing.Point(174, 352);
             this.Del_employee.Name = "Del_employee";
-            this.Del_employee.Size = new System.Drawing.Size(113, 35);
+            this.Del_employee.Size = new System.Drawing.Size(89, 35);
             this.Del_employee.TabIndex = 18;
             this.Del_employee.Text = "Удалить";
-            this.Del_employee.UseVisualStyleBackColor = true;
+            this.Del_employee.UseVisualStyleBackColor = false;
             this.Del_employee.Click += new System.EventHandler(this.Del_employee_Click);
             // 
             // Add_employee
             // 
-            this.Add_employee.Location = new System.Drawing.Point(31, 393);
+            this.Add_employee.BackColor = System.Drawing.Color.White;
+            this.Add_employee.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Add_employee.Font = new System.Drawing.Font("Times New Roman", 10F);
+            this.Add_employee.Location = new System.Drawing.Point(54, 352);
             this.Add_employee.Name = "Add_employee";
-            this.Add_employee.Size = new System.Drawing.Size(113, 35);
+            this.Add_employee.Size = new System.Drawing.Size(100, 35);
             this.Add_employee.TabIndex = 17;
             this.Add_employee.Text = "Добавить";
-            this.Add_employee.UseVisualStyleBackColor = true;
+            this.Add_employee.UseVisualStyleBackColor = false;
             this.Add_employee.Click += new System.EventHandler(this.Add_employee_Click);
             // 
             // Dep_list
@@ -175,7 +195,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.DataGridView DataView;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.PictureBox Exit;
         private System.Windows.Forms.PictureBox Back;
@@ -183,6 +202,8 @@
         private System.Windows.Forms.ComboBox Dep_list;
         private System.Windows.Forms.Button Del_employee;
         private System.Windows.Forms.Button Add_employee;
+        public System.Windows.Forms.DataGridView DataView;
+        private System.Windows.Forms.Button Change;
     }
 }
 

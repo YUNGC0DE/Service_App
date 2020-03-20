@@ -58,6 +58,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CRUD\AddEmployeeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CRUD\AddEmployeeForm.Designer.cs">
+      <DependentUpon>AddEmployeeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CRUD\DepartmentsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CRUD\EmployeesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="DataModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -76,6 +88,12 @@
     <Compile Include="Department.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DepartmentsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DepartmentsForm.Designer.cs">
+      <DependentUpon>DepartmentsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="EmployeesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,12 +111,18 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View_Edit_employeer_form.cs">
+    <Compile Include="CRUD\View_Edit_employeer_form.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View_Edit_employeer_form.Designer.cs">
+    <Compile Include="CRUD\View_Edit_employeer_form.Designer.cs">
       <DependentUpon>View_Edit_employeer_form.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CRUD\AddEmployeeForm.resx">
+      <DependentUpon>AddEmployeeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DepartmentsForm.resx">
+      <DependentUpon>DepartmentsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EmployeesForm.resx">
       <DependentUpon>EmployeesForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -115,7 +139,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="View_Edit_employeer_form.resx">
+    <EmbeddedResource Include="CRUD\View_Edit_employeer_form.resx">
       <DependentUpon>View_Edit_employeer_form.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="DataModel.edmx">

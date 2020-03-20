@@ -52,5 +52,11 @@ namespace TestTask
         {
             lastPoint = new Point(e.X, e.Y);
         }
+
+        private void Department_button_Click(object sender, EventArgs e)
+        {
+            new DepartmentsForm().Show();
+            Hide();
+        }
     }
 }
