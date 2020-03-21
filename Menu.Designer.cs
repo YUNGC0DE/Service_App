@@ -44,7 +44,7 @@
             this.Employees_button.FlatAppearance.MouseOverBackColor = System.Drawing.Color.PapayaWhip;
             this.Employees_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Employees_button.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.Employees_button.Location = new System.Drawing.Point(35, 88);
+            this.Employees_button.Location = new System.Drawing.Point(35, 196);
             this.Employees_button.Name = "Employees_button";
             this.Employees_button.Size = new System.Drawing.Size(289, 84);
             this.Employees_button.TabIndex = 5;
@@ -60,7 +60,7 @@
             this.Department_button.FlatAppearance.MouseOverBackColor = System.Drawing.Color.PapayaWhip;
             this.Department_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Department_button.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.Department_button.Location = new System.Drawing.Point(35, 197);
+            this.Department_button.Location = new System.Drawing.Point(35, 98);
             this.Department_button.Name = "Department_button";
             this.Department_button.Size = new System.Drawing.Size(289, 79);
             this.Department_button.TabIndex = 6;
@@ -82,6 +82,7 @@
             this.Structure_button.TabIndex = 7;
             this.Structure_button.Text = "Структура предприятия";
             this.Structure_button.UseVisualStyleBackColor = false;
+            this.Structure_button.Click += new System.EventHandler(this.Structure_button_Click);
             // 
             // Exit
             // 

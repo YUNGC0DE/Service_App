@@ -117,6 +117,12 @@
     <Compile Include="CRUD\View_Edit_employeer_form.Designer.cs">
       <DependentUpon>View_Edit_employeer_form.cs</DependentUpon>
     </Compile>
+    <Compile Include="StructureForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StructureForm.Designer.cs">
+      <DependentUpon>StructureForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="CRUD\AddEmployeeForm.resx">
       <DependentUpon>AddEmployeeForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -141,6 +147,9 @@
     </Compile>
     <EmbeddedResource Include="CRUD\View_Edit_employeer_form.resx">
       <DependentUpon>View_Edit_employeer_form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StructureForm.resx">
+      <DependentUpon>StructureForm.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="DataModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

@@ -58,5 +58,12 @@ namespace TestTask
             new DepartmentsForm().Show();
             Hide();
         }
+
+        private void Structure_button_Click(object sender, EventArgs e)
+        {
+            Hide();
+            new StructureForm().Show();
+           
+        }
     }
 }

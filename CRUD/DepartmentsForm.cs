@@ -15,6 +15,17 @@ namespace TestTask
     public partial class DepartmentsForm
     {
         private bool changing = false;
+
+        public  void Update_Dep()
+        {
+            var bs = new BindingSource();
+            foreach (var dep in db.Department)
+            {
+                bs.Add(dep.Name);
+            }
+            Dep.DataSource = bs;
+            Dep.SelectedIndex = -1;
+        }
         private void Add_Click(object sender, EventArgs e)
         {
             Add.Enabled = false;
@@ -27,13 +38,7 @@ namespace TestTask
             Dep.Enabled = true;
             Department_name.Text = "";
             Department_code.Text = "";
-            var bs = new BindingSource();
-            foreach (var dep in db.Department)
-            {
-                bs.Add(dep.Name);
-            }
-            Dep.DataSource = bs;
-            Dep.SelectedIndex = -1;
+            Update_Dep();
             Cansel.Visible = true;
         }
 
@@ -43,6 +48,7 @@ namespace TestTask
 
             DataViewDep.Enabled = true;
             Save.Visible = false;
+            Save.Enabled = true;
             Department_name.Enabled = false;
             Department_code.Enabled = false;
             Dep.Enabled = false;
@@ -56,6 +62,7 @@ namespace TestTask
             return;
         }
 
+        private List<Guid> kids = new List<Guid>();
         private void Save_Click(object sender, EventArgs e)
         {
             DataViewDep.Enabled = false;
@@ -107,6 +114,12 @@ namespace TestTask
                 changing = false;
                 var id = DataViewDep.SelectedRows[0].Cells[0].Value.ToString();
                 Department dep = db.Department.Find(Guid.Parse(id));
+                if (Dep.SelectedItem.ToString() ==  db.Department.Where(x=>x.ID == dep.ID).Select(x=>x.Name).First())
+                {
+                    MessageBox.Show("Отдел не может быть своим же родительским отделом");
+                    Save.Enabled = false;
+                    return;
+                }
                 if (Dep.SelectedIndex == -1)
                 {
                     dep.ParentDepartmentID = null;
@@ -129,26 +142,19 @@ namespace TestTask
                 DataViewDep.Refresh();
                 MessageBox.Show("Департамент изменен");
             }
+            Update_Dep();
             Save.Visible = false;
-            Change.Enabled = true;
-            Del.Enabled = true;
+            Cansel.Visible = false;
             Department_name.Enabled = false;
             Department_code.Enabled = false;
             Dep.Enabled = false;
-            var bs = new BindingSource();
-            foreach (var dep in db.Department)
-            {
-                bs.Add(dep.Name);
-            }
-            Dep.DataSource = bs;
-            Dep.SelectedIndex = -1;
             Change.Enabled = false;
-            Cansel.Visible = false;
             Del.Enabled = false;
+            Add.Enabled = true;
             Department_name.Text = "";
             Department_code.Text = "";
             DataViewDep.Enabled = true;
-            Add.Enabled = true;
+           
         }
 
         private void Del_Click(object sender, EventArgs e)
@@ -171,20 +177,14 @@ namespace TestTask
                     }
 
                     db.Department.Remove(department);
-                    var bs = new BindingSource();
-                    foreach (var dep in db.Department)
-                    {
-                        bs.Add(dep.Name);
-                    }
-                    Dep.DataSource = bs;
                     Department_name.Text = "";
                     Department_code.Text = "";
-                    Dep.SelectedIndex = -1;
                     Change.Enabled = false;
                     Del.Enabled = false;
                     db.SaveChanges();
                     DataViewDep.Refresh();
                     MessageBox.Show("Департамент удален.");
+                    Update_Dep();
                 }
                 else
                 {
@@ -201,9 +201,9 @@ namespace TestTask
         private void Change_Click(object sender, EventArgs e)
         {
             Change.Enabled = false;
-            DataViewDep.Enabled = false;
             Add.Enabled = false;
             Del.Enabled = false;
+            DataViewDep.Enabled = false;
             Save.Visible = true;
             Cansel.Visible = true;
             Department_name.Enabled = true;

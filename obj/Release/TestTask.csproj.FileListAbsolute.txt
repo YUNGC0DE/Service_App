@@ -16,3 +16,4 @@ C:\Users\menin\source\repos\TestTask\obj\Release\TestTask.csproj.GenerateResourc
 C:\Users\menin\source\repos\TestTask\obj\Release\TestTask.csproj.CopyComplete
 C:\Users\menin\source\repos\TestTask\obj\Release\TestTask.exe
 C:\Users\menin\source\repos\TestTask\obj\Release\TestTask.pdb
+C:\Users\menin\source\repos\TestTask\obj\Release\TestTask.StructureForm.resources

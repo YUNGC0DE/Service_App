@@ -70,9 +70,9 @@ namespace TestTask
             var selected_dep = Dep_list.SelectedItem.ToString();
             if(selected_dep != "Выберите департамент")
             {
-                var id = db.Department.Local.Where(x => x.Name == selected_dep).Select(y => y.ID).First();
-                List<Guid?> epoch_ids = new List<Guid?> { id };      /*ID предприятий для поиска детей на каждом уровне вложенности*/
-                Kids(id, ref kids, epoch_ids);
+                var id = db.Department.Where(x => x.Name == selected_dep).Select(y => y.ID).First();
+                List<Guid?> epoch_id = new List<Guid?> { id};   /*ID предприятий для поиска детей на каждом уровне вложенности*/
+                Kids( ref kids, epoch_id);
                 kids.Add(id);
                 var employees = db.Empoyee.Where(x => kids.Contains(x.DepartmentID)); ;
                 DataView.DataSource = employees.ToList();
@@ -88,10 +88,10 @@ namespace TestTask
             }
         }
 
-        private int Kids(Guid id, ref List<Guid> kids, List<Guid?> epochs_id)
+        private int Kids(ref List<Guid> kids, List<Guid?> epochs_id)
         {
             List<Guid?> epochs_kids_id = new List<Guid?>();
-            foreach (var kid in db.Department.Local)
+            foreach (var kid in db.Department)
             {
                 if (epochs_id.Contains(kid.ParentDepartmentID))
                 {
@@ -101,7 +101,7 @@ namespace TestTask
             }
             if (epochs_kids_id.Count() > 0)
             {
-                return Kids(id, ref kids, epochs_kids_id);
+                return Kids( ref kids, epochs_kids_id);
             }
             else
             {
