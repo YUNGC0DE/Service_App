@@ -62,7 +62,6 @@ namespace TestTask
             return;
         }
 
-        private List<Guid> kids = new List<Guid>();
         private void Save_Click(object sender, EventArgs e)
         {
             DataViewDep.Enabled = false;

@@ -47,7 +47,7 @@ namespace TestTask
                     db.Empoyee.Remove(employee);
                     db.SaveChanges();
                     Dep_list.SelectedIndex = 0;
-                    MessageBox.Show("Сотрудник удален"); // Выводим сообщение о звершении.
+                    MessageBox.Show("Сотрудник удален");
                 }
                 else if (result == DialogResult.No)
                 {

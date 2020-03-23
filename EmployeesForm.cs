@@ -62,9 +62,6 @@ namespace TestTask
             lastPoint = new Point(e.X, e.Y);
         }
 
-
-        private List<Guid> kids  = new List<Guid>();
-
         private void Dep_list_SelectedIndexChanged(object sender, EventArgs e)
         {
             var selected_dep = Dep_list.SelectedItem.ToString();
@@ -72,11 +69,11 @@ namespace TestTask
             {
                 var id = db.Department.Where(x => x.Name == selected_dep).Select(y => y.ID).First();
                 List<Guid?> epoch_id = new List<Guid?> { id};   /*ID предприятий для поиска детей на каждом уровне вложенности*/
+                List<Guid> kids = new List<Guid>();
                 Kids( ref kids, epoch_id);
                 kids.Add(id);
                 var employees = db.Empoyee.Where(x => kids.Contains(x.DepartmentID)); ;
                 DataView.DataSource = employees.ToList();
-                kids.RemoveRange(0, kids.Count());
                 DataView.Columns[5].Visible = false;
                 DataView.Columns[6].Visible = false;
                 DataView.Columns[8].Visible = false;
