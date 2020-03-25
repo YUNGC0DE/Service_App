@@ -76,6 +76,11 @@ namespace TestTask
                 MessageBox.Show("Отчество не может быть больше 50 символов");
                 return;
             }
+            if (Dateofbirth.Value > DateTime.Now)
+            {
+                MessageBox.Show("Некорректная дата рождения");
+                return;
+            }
             string firstName = F_name.Text;
             string surname = Surname.Text;
             string patr = Patr.Text;

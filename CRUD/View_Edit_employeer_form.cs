@@ -24,7 +24,9 @@ namespace TestTask
             Patr.Text = patr;
             Patr.ReadOnly = true;
             Dateofbirth.Value = date;
-            int age = (int)(DateTime.Now - date).TotalDays / 365;
+            DateTime now = DateTime.Today;
+            int age = now.Year - date.Year;
+            if (date > now.AddYears(-age)) age--;       /* Исправлен возраст */
             Age.Text = Convert.ToString(age);
             Age.ReadOnly = true;
             Docser.Text = docser;
@@ -113,6 +115,12 @@ namespace TestTask
                 MessageBox.Show("Отчество не может быть больше 50 символов");
                 return;
             }
+
+            if(Dateofbirth.Value > DateTime.Now)
+            {
+                MessageBox.Show("Некорректная дата рождения");
+                return;
+            }
             using (DataModel db = new DataModel())
              {
                 Empoyee employee = db.Empoyee.Find(Convert.ToInt32(ID.Text));
@@ -126,7 +134,9 @@ namespace TestTask
                 employee.DepartmentID = db.Department.Where(x => x.Name == Dep.SelectedItem.ToString()).Select(x => x.ID).First();
                 MessageBox.Show("Данные успешно изменены");
                 Dep_id.Text = employee.DepartmentID.ToString();
-                int age = (int)(DateTime.Now - employee.DateOfBirth).TotalDays / 365;
+                DateTime now = DateTime.Today;
+                int age = now.Year - Dateofbirth.Value.Year;
+                if (Dateofbirth.Value > now.AddYears(-age)) age--;       /* Исправлен возраст */
                 Age.Text = Convert.ToString(age);
                 db.SaveChanges();
                 Save.Enabled = false;
