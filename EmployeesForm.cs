@@ -70,9 +70,9 @@ namespace TestTask
                 var id = db.Department.Where(x => x.Name == selected_dep).Select(y => y.ID).First();
                 List<Guid?> epoch_id = new List<Guid?> { id};   /*ID предприятий для поиска детей на каждом уровне вложенности*/
                 List<Guid> kids = new List<Guid>();
-                Kids( ref kids, epoch_id);
+                Kids( ref kids, epoch_id, db);
                 kids.Add(id);
-                var employees = db.Empoyee.Where(x => kids.Contains(x.DepartmentID)); ;
+                var employees = db.Empoyee.Where(x => kids.Contains(x.DepartmentID));
                 DataView.DataSource = employees.ToList();
                 DataView.Columns[5].Visible = false;
                 DataView.Columns[6].Visible = false;
@@ -85,7 +85,7 @@ namespace TestTask
             }
         }
 
-        private int Kids(ref List<Guid> kids, List<Guid?> epochs_id)
+        public static int Kids(ref List<Guid> kids, List<Guid?> epochs_id, DataModel db)
         {
             List<Guid?> epochs_kids_id = new List<Guid?>();
             foreach (var kid in db.Department)
@@ -98,7 +98,7 @@ namespace TestTask
             }
             if (epochs_kids_id.Count() > 0)
             {
-                return Kids( ref kids, epochs_kids_id);
+                return Kids( ref kids, epochs_kids_id, db);
             }
             else
             {

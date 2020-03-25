@@ -158,38 +158,37 @@ namespace TestTask
 
         private void Del_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Удалить департамент?", "Подтвердите действие", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show("Удалить департамент?\n\nУдаление департамента приведет к удалению всех его сотрудников и дочерних департаментов.", "Подтвердите действие", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {
+                
                 Department department = db.Department.Find(db.Department
                    .Where(x => x.Name == Department_name.Text).Select(x => x.ID).First());
-                if(db.Empoyee.Where(x=>x.DepartmentID == department.ID).ToList().Count<1)
+                List<Guid?> epoch_id = new List<Guid?> { department.ID };
+                List<Guid> kids = new List<Guid>();
+                EmployeesForm.Kids(ref kids, epoch_id, db);
+                kids.Add(department.ID);
+                foreach(var kid in kids)
                 {
-                    foreach (var dep in db.Department)
+                    var employees_to_del = db.Empoyee.Where(x => x.DepartmentID == kid);     /*Удаляются все работники дочерних департаментов + выбранного*/
+                    foreach(var employee in employees_to_del)
                     {
-                        if (dep.ParentDepartmentID == department.ID)
-                        {
-                            MessageBox.Show("Невозможно удалить департамент, имеющий вложенные отделы.");
-                            return;
-                        }
+                        db.Empoyee.Remove(employee);
                     }
-
-                    db.Department.Remove(department);
-                    Department_name.Text = "";
-                    Department_code.Text = "";
-                    Change.Enabled = false;
-                    Del.Enabled = false;
-                    db.SaveChanges();
-                    DataViewDep.Refresh();
-                    MessageBox.Show("Департамент удален.");
-                    Update_Dep();
                 }
-                else
+                foreach (var kid in kids)
                 {
-                    MessageBox.Show("Невозможно удалить департамент, имеющий сотрудников.");
-                    return;
+                    db.Department.Remove(db.Department.Find(kid));   /*Удаляются все дочерние департаменты + выбранный*/
                 }
+                Department_name.Text = "";
+                Department_code.Text = "";
+                Change.Enabled = false;
+                Del.Enabled = false;
+                db.SaveChanges();
+                DataViewDep.Refresh();
+                MessageBox.Show("Департамент удален.");
+                Update_Dep();
             }
             else if (result == DialogResult.No)
             {
