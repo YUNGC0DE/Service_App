@@ -42,7 +42,6 @@ namespace TestTask
             Cansel.Visible = true;
         }
 
-
         private void Cansel_Click(object sender, EventArgs e)
         {
 
@@ -145,16 +144,6 @@ namespace TestTask
                 {
                     dep.ParentDepartmentID = null;
                 }
-
-                if (Dep.SelectedIndex == -1)
-                {
-                    dep.ParentDepartmentID = null;
-                }
-                else
-                {
-                    dep.ParentDepartmentID = db.Department
-                        .Where(x => x.Name == Dep.SelectedItem.ToString()).Select(x => x.ID).First();
-                }
                 if (Department_code.Text.Length < 1)
                 {
                     dep.Code = null;
@@ -185,7 +174,7 @@ namespace TestTask
 
         private void Del_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Удалить департамент?\n\nУдаление департамента приведет к удалению всех его сотрудников.", "Подтвердите действие", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show("Удалить департамент?\n\nУдаление департамента приведет к удалению всех его сотрудников и всех его дочерних отделов.", "Подтвердите действие", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {

@@ -90,8 +90,6 @@ namespace TestTask
             List<Guid?> epochs_kids_id = new List<Guid?>();
             foreach (var kid in db.Department)
             {
-
-               
                 if (epochs_id.Contains(kid.ParentDepartmentID))
                 {
                     kids.Add(kid.ID);
