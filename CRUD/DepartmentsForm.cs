@@ -62,6 +62,23 @@ namespace TestTask
             return;
         }
 
+
+        private bool Cyclicity()
+        {
+            var id = DataViewDep.SelectedRows[0].Cells[0].Value.ToString();
+            Department dep = db.Department.Find(Guid.Parse(id));
+            var id_parent = db.Department.Where(x => x.Name == Dep.SelectedItem.ToString()).Select(x => x.ID).FirstOrDefault();
+            List<Guid?> epoch_id = new List<Guid?> { dep.ID };
+            List<Guid> kids = new List<Guid>();
+            EmployeesForm.Kids(ref kids, epoch_id, db);
+            kids.Add(dep.ID);
+            if (kids.Contains(id_parent))
+            {
+                return true;
+            }
+            return false;
+        }
+
         private void Save_Click(object sender, EventArgs e)
         {
             DataViewDep.Enabled = false;
@@ -81,7 +98,7 @@ namespace TestTask
                 return;
             }
 
-            if (!changing) 
+            if (!changing)
             {
                 Department department = new Department();
                 department.Name = Department_name.Text;
@@ -113,12 +130,22 @@ namespace TestTask
                 changing = false;
                 var id = DataViewDep.SelectedRows[0].Cells[0].Value.ToString();
                 Department dep = db.Department.Find(Guid.Parse(id));
-                if (Dep.SelectedItem.ToString() ==  db.Department.Where(x=>x.ID == dep.ID).Select(x=>x.Name).First())
+                if (Dep.SelectedIndex != -1)
                 {
-                    MessageBox.Show("Отдел не может быть своим же родительским отделом");
-                    Save.Enabled = false;
-                    return;
+                    if (Cyclicity())
+                    {
+                        MessageBox.Show("Зацикливание структуры предприятия недопустимо.");
+                        Save.Enabled = false;
+                        return;
+                    }
+                    dep.ParentDepartmentID = db.Department
+                        .Where(x => x.Name == Dep.SelectedItem.ToString()).Select(x => x.ID).First();
                 }
+                else
+                {
+                    dep.ParentDepartmentID = null;
+                }
+
                 if (Dep.SelectedIndex == -1)
                 {
                     dep.ParentDepartmentID = null;
@@ -158,7 +185,7 @@ namespace TestTask
 
         private void Del_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Удалить департамент?\n\nУдаление департамента приведет к удалению всех его сотрудников и дочерних департаментов.", "Подтвердите действие", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show("Удалить департамент?\n\nУдаление департамента приведет к удалению всех его сотрудников.", "Подтвердите действие", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {
